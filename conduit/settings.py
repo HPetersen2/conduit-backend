@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 
 import os
 from dotenv import load_dotenv
-import environ
 
 load_dotenv()
 
