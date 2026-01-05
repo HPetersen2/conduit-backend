@@ -11,12 +11,11 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
+from pathlib import Path
 from dotenv import load_dotenv
 
-load_dotenv(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), '.env'))
-
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = Path(__file__).resolve().parent.parent
+load_dotenv(os.path.join(BASE_DIR.parent, '.env'))
 
 
 # Quick-start development settings - unsuitable for production
@@ -30,36 +29,33 @@ DEBUG = os.environ.get("DEBUG", "False") == "True"
 
 # 'DJANGO_ALLOWED_HOSTS' should be a single string of hosts with a , between each.
 # For example: 'DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1,[::1]'
-ALLOWED_HOSTS = ['*', 'conduit-backend', 'localhost']
-CSRF_TRUSTED_ORIGINS = [
-    "http://localhost:4200",
-    "http://conduit-frontend:4200",  # Container-Name des Frontend-Dienstes
-]
+ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", "").split(",")
 
-CORS_ALLOWED_ORIGINS = [
-    "http://127.0.0.1:5500",
-    "http://localhost:5500",
-    "http://localhost:4200",
-    "http://conduit-frontend:4200",
-]
+# CORS_ALLOWED_ORIGINS = os.environ.get(
+#     "CORS_ALLOWED_ORIGINS", ""
+# ).split(",")
 
-CORS_ALLOW_CREDENTIALS = True
+# CSRF_TRUSTED_ORIGINS = os.environ.get(
+#     "CSRF_TRUSTED_ORIGINS", ""
+# ).split(",")
+
+# CORS_ALLOW_CREDENTIALS = os.environ.get(
+#     "CORS_ALLOW_CREDENTIALS", "False"
+# ) == "True"
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-    'corsheaders',
     'django_extensions',
     'rest_framework',
-
     'conduit.apps.articles',
     'conduit.apps.authentication',
     'conduit.apps.core',
@@ -149,11 +145,15 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = "/static/"
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
+
+MEDIA_URL = "/media/"
+STATIC_ROOT = os.path.join(BASE_DIR, "media")
 
 CORS_ORIGIN_WHITELIST = (
-    '0.0.0.0:4000',
-    'localhost:4000',
+    '0.0.0.0:4200',
+    'localhost:4200',
 )
 
 # Tell Django about the custom `User` model we created. The string
