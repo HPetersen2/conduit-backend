@@ -31,19 +31,6 @@ DEBUG = os.environ.get("DEBUG", "False") == "True"
 # For example: 'DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1,[::1]'
 ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", "").split(",")
 
-# CORS_ALLOWED_ORIGINS = os.environ.get(
-#     "CORS_ALLOWED_ORIGINS", ""
-# ).split(",")
-
-# CSRF_TRUSTED_ORIGINS = os.environ.get(
-#     "CSRF_TRUSTED_ORIGINS", ""
-# ).split(",")
-
-# CORS_ALLOW_CREDENTIALS = os.environ.get(
-#     "CORS_ALLOW_CREDENTIALS", "False"
-# ) == "True"
-
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -154,6 +141,9 @@ STATIC_ROOT = os.path.join(BASE_DIR, "media")
 CORS_ORIGIN_WHITELIST = (
     '0.0.0.0:4200',
     'localhost:4200',
+    '0.0.0.0:8282',
+    'localhost:8282',
+    '5.75.162.221:8282',
 )
 
 # Tell Django about the custom `User` model we created. The string
