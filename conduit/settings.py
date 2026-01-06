@@ -138,13 +138,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static")
 MEDIA_URL = "/media/"
 STATIC_ROOT = os.path.join(BASE_DIR, "media")
 
-CORS_ORIGIN_WHITELIST = (
-    '0.0.0.0:4200',
-    'localhost:4200',
-    '0.0.0.0:8282',
-    'localhost:8282',
-    '5.75.162.221:8282',
-)
+CORS_ORIGIN_WHITELIST = os.environ.get("CORS_ORIGIN_WHITELIST", "").split(",")
 
 # Tell Django about the custom `User` model we created. The string
 # `authentication.User` tells Django we are referring to the `User` model in
