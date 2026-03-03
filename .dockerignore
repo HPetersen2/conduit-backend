@@ -1,0 +1,39 @@
+# ignore Python bytecode
+__pycache__
+*.py[cod]
+*$py.class
+
+# distribution/build directories
+build/
+dist/
+
+# virtual environments
+venv/
+.env
+env/
+
+# Django migrations (they can be copied explicitly if needed)
+conduit/backends/*/migrations
+
+# caches and logs
+*.log
+*.pot
+*.pyc
+
+# IDE/editor files
+.vscode/
+.idea/
+*.swp
+
+# Git
+.git
+.gitignore
+
+# Docker files
+Dockerfile
+.dockerignore
+
+tests/
+
+# ensure migrations are included only when needed
+!conduit/*/migrations/*.py
